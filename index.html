@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>Security Game</title>
+  <script>
+  var Module = {
+    preRun: [function() {
+      Module.FS_createPreloadedFile('/', 'haarcascade_eye.xml', 'https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye.xml', true, false);
+      Module.FS_createPreloadedFile('/', 'haarcascade_frontalface_default.xml', 'https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml', true, false);
+      Module.FS_createPreloadedFile('/', 'haarcascade_profileface.xml', 'https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_profileface.xml', true, false);
+    }],
+    _main: function() {cascadeIsReady();}
+  };
+</script>
+  <link rel="stylesheet" href="mystyle.css">
+</head>
+  <body>
+    <div id = "container" style = "background-image: url('images/source.gif'); width: 976px; height: 685px;">
+
+      <div id="title">
+        <div class = "titleBox">
+          <h1 style = "color: white; font-size: 100px; text-align: center; display:block;">
+            Visual Privacy Education Game
+          </h1>
+        </div>
+        <div class="titleButtonDiv">
+          <a href="#" class="titleButton" onclick="startGameButton()">Let The Game Begin</a>
+        </div>
+      </div>
+
+      <div id="roleSelector" style = "visibility: hidden;">
+        <div class = "titleBox" >
+          <h1 id = "roleName" style = "color: white; font-size: 100px; text-align: center; display:block;">
+            Disguise Your Agent
+          </h1>
+        </div>
+        <div class="titleButtonDiv">
+          <button id = "b1" class="titleButton" onclick="diguiseAgentButton()">Start</button>
+        </div>
+      </div>
+
+      <div id = "selectionScreen" style = "visibility: hidden;">
+
+        <div class="fleft" style = "float:left; width: 50%; height: 685px; overflow-y:scroll;background-color: white;">
+
+          <div class="group" style = "display: inline-block;">
+            <img onclick = "choosePlayer(this)" src="images\personel\1.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\1 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" style = "display: inline-block; width: 400px; background-color:gray;">
+            <img onclick = "choosePlayer(this)" src="images\personel\2.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\2 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" style = "display: inline-block;">
+            <img onclick = "choosePlayer(this)" src="images\personel\3.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\3 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" style = "display: inline-block; width: 400px; background-color:gray;">
+            <img onclick = "choosePlayer(this)" src="images\personel\4.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\4 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" style = "display: inline-block;">
+            <img onclick = "choosePlayer(this)" src="images\personel\5.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\5 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" style = "display: inline-block; width: 400px; background-color:gray;">
+            <img onclick = "choosePlayer(this)" src="images\personel\6.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\6 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" style = "display: inline-block;">
+            <img onclick = "choosePlayer(this)" src="images\personel\7.jpg" alt="" style = "height:150px; width: 150px">
+            <img onclick = "choosePlayer(this)" src="images\personel\7 (2).jpg" alt="" style = "height:150px; width: 150px">
+          </div>
+
+          <div class="group" >
+            <div class="inputoutput">
+              <div class="caption"><input type="file" id="fileInput" name="file" /></div>
+            </div>
+          </div>
+        </div>
+        <div class="fright" style = "float:right; width: 50%; height: 685px; background-color: black; text-align: center;">
+            <h2 style = "color: white;">Pick Your Agent</h2>
+            <img src="images\black.png" alt="" style = "height:150px; width: 150px" id = "chosenPlayer">
+            <textarea name="name" rows="8" cols="60" readonly = "true">You will be responsible for this agent safety!</textarea>
+            <button type="button" name="button" class = "titleButton" onclick="startEdit()" style = "width: 460px;">Next</button>
+        </div>
+      </div>
+
+      <div id = "edit" style = "visibility: hidden;">
+
+        <div class="" style = "text-align: center; background-color: red; ">
+          <h1 id = "label" style = "color:white; margin:0;">Disguise Your Agent</h1>
+        </div>
+
+        <div class="" style = "display: inline-block; ">
+          <div style="float:left; position: relative; width: 600px; height:600px;">
+            <canvas id="canvas" width="600" height="600" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+
+            <canvas id="gaussianBlurLayer" width="600" height="600" style="float:left; position: absolute; left: 0; top: 0; z-index: 0; visibility: hidden"></canvas>
+            <canvas id="funnyFaceLayer" width="600" height="600" style="float:left; position: absolute; left: 0; top: 0; z-index: 0; visibility: hidden"></canvas>
+            <canvas id="recolorLayer" width="600" height="600" style="float:left; position: absolute; left: 0; top: 0; z-index: 0; visibility: hidden"></canvas>
+            <canvas id="scribbleLayer" width="600" height="600" style="float:left; position: absolute; left: 0; top: 0; z-index: 0; visibility: hidden"></canvas>
+            <canvas id="fullColorLayer" width="600" height="600" style="float:left; position: absolute; left: 0; top: 0; z-index: 0;visibility: hidden"></canvas>
+            <canvas id="blurLayer" width="600" height="600" style="float:left; position: absolute; left: 0; top: 0; z-index: 0; visibility: hidden"></canvas>
+          </div>
+
+          <div class="" style="float:right; height: 600px; width: 366px; background-color: black; padding: 5px;">
+            <div class="" style="text-align: center">
+              <h1 style="color:white; margin: 0;" id = "effectCount">Effect Left: 2</h1>
+            </div>
+            <div class="wrapper" style = "position: relative;">
+              <div id = "keyLock" style = "visibility: hidden; position: absolute;text-align: center;">
+                <textarea id = "submit" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" name="name" rows="1" cols="20" style = "font-size: 20px; text-align: center;">Enter Password Here</textarea>
+                <div class="titleButtonDivAlt" style = "top: 80px; left: 44%">
+                  <button class="titleButton" onclick="submitPwd()" id = "submitPwdBtn">Submit</button>
+                  <button class="titleButton" onclick="intel()" style = "color: blue;" id = "intelBtn">Crack Password</button>
+                </div>
+              </div>
+
+
+              <div id = "option">
+                <h2 style="color:white; margin: 0;">Facial Modification</h2>
+                <label for="blurFace" style="color:white;" id = "1"><input type="checkbox" name="blurFace" value="Blur Face" id="blurFace" onclick = "edit(this)" />Blur Face</label>
+                <br>
+                <!--
+                <label for="funnyFace" style="color:white;" id = "2"><input type="checkbox" name="funnyFace" value="Funny Face" id="funnyFace" onclick = "edit(this)"/>Funny Face</label>
+
+                <br>-->
+                <label for="recolor" style="color:white;" id = "3"><input type="checkbox" name="recolor" value="Recolor" id="recolor" onclick = "edit(this)"/>Scribble</label>
+
+                <h2 style="color:white; margin: 0;">Full Modification</h2>
+
+                <label for="fullColor" style="color:white;" id = "4"><input type="checkbox" name="fullColor" value="Full Color" id="fullColor" onclick = "edit(this)"/>Full Color</label>
+                <br>
+                <!--
+                <label for="scribble" style="color:white;" id = "5"><input type="checkbox" name="scribble" value="Scribble" id="scribble" onclick = "edit(this)"/>Scribble</label>
+                <br>-->
+                <label for="gaussianBlur" style="color:white;" id = "6"><input type="checkbox" name="gaussianBlur" value="Gaussian Blur" id="gaussianBlur" onclick = "edit(this)"/>Gaussian Blur</label>
+                <br>
+              </div>
+            </div>
+
+
+            <button type="button" id = "randomButton" class = "titleButton" onclick = "finishEdit()" style="width: -webkit-fill-available;">Next</button>
+
+            <div class="maleChoice" style = "overflow:auto;visibility: hidden; display: inline-block;" id = "maleChoice">
+              <img src="images\personel\1 (2).jpg" id = "p1" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\2 (2).jpg" id = "p2" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\3 (2).jpg" id = "p3" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\4 (2).jpg" id = "p4" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\5 (2).jpg" id = "p5" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\6 (2).jpg" id = "p6" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\7 (2).jpg" id = "p7" alt="" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\1.jpg" alt="" id = "p8" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\2.jpg" alt="" id = "p9" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\3.jpg" alt="" id = "p10" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\4.jpg" alt="" id = "p11" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\5.jpg" alt="" id = "p12" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\6.jpg" alt="" id = "p13" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\personel\7.jpg" alt="" id = "p14" width = "60px" height = auto onclick = "submitTarget(this)">
+              <img src="images\black.png" alt="" id = "p15" width = "60px" height = auto onclick = "submitTarget(this)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id = "encryptionKey" style = "visibility: hidden;">
+          <div style = "text-align: center; background-color: gray;">
+            <h1 style = "size: 60px;/* font-size: 60px; */color: white;margin-top: 0px;padding-top: 21px;padding-bottom: 21px;margin-bottom: 0px;">
+              Encryption
+            </h1>
+          </div>
+          <div class="" style = "text-align: center;">
+            <h2 style = "margin-top: 0px; border-bottom-width: 0px; padding-bottom: 20px;padding-top: 20px;">
+              Do you want to encrypt your modification
+            </h2>
+            <div class="titleButtonDivAlt">
+              <button class="titleButton" onclick="enterPassword()">Yes</button>
+              <button class="titleButton" onclick="enterPlayer2()">No</button>
+            </div>
+          </div>
+          <div class="" style = "text-align: left; background-color: gray;">
+            <p style = "color: white;font-size: 20px;padding-bottom: 20px;padding-left: 5px;padding-right: 10px;padding-top: 20px;">
+              Cryptography is the art of protecting information by transforming it into an unreadable format, called cipher text. Only those who possess a secret key can decipher the message into plain text. Encrypted messages can sometimes be broken by cryptanalysis, also called codebreaking, although modern cryptography techniques are virtually unbreakable.
+            </p>
+          </div>
+      </div>
+
+      <div id = "enterKey" style = "visibility: hidden;">
+        <div style = "text-align: center;background-color: gray;margin-bottom: 20px;">
+          <h1 style = "size: 90px; font-size: 90px; color: white;margin-top: 0px;padding-top: 21px;padding-bottom: 21px;margin-bottom: 0px;">
+            Enter Key
+          </h1>
+        </div>
+        <textarea id="pwd"rows="1" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" cols="43" style = "font-size: 40px;text-align: center;margin-bottom: 20px;">Enter a 4 letter password</textarea>
+        <button class="titleButton" name="button" onclick="submitPassword()" style="width: -webkit-fill-available;">Submit</button>
+      </div>
+      <div id = "win" style = "visibility: hidden;">
+
+        <div class="" style = "text-align: center; background-color: black; ">
+          <h1 id = "labelWinLose" style = "color:white; margin:0;">You win</h1>
+        </div>
+
+        <div class="" style = "height: 100px; text-align: center;">
+          <h1 id = "announcement">You have successfully identified and captured the agent</h1>
+        </div>
+
+        <div class="titleButtonDiv">
+          <a href="#" class="titleButton" onclick="restart()">Replay</a>
+        </div>
+      </div>
+      <div id = "tm">
+        <h6 id = "tradeMark" style = "position: absolute;  bottom: 0;  width: 100%;  text-align: right; color : white;">© Copyright: VP Edu Game R&D Team: Ankur Chattopadhyay and Hoang Nguyen</h1>
+      </div>
+      <script async src="JS/opencv.js" type="text/javascript" onload="openCVReady()"></script>
+      <script src="JS/utils.js"></script>
+      <script src = "JS/editTools.js"></script>
+      <script src = "JS/main.js"></script>
+    </div>
+  </body>
+</html>

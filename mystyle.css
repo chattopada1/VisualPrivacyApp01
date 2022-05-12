@@ -1,0 +1,68 @@
+#container {
+  position: relative;
+}
+#container , #title {
+  position: absolute;
+}
+#title, #roleSelector, #selectionScreen, #edit, #encryptionKey, #enterKey {
+    position: absolute;
+    width: 976px;
+    height: 685px;
+}
+
+
+img {
+  padding: 5px;
+}
+
+.titleBox {
+  text-align: center;
+  width: inherit;
+  background-color:rgba(0, 0, 0, 0.7);
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.titleButtonDiv {
+  text-align: center;
+  display:inline-block;
+  margin: 0;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.titleButtonDivAlt {
+  text-align: center;
+  display:inline-block;
+  margin: 0;
+  position: relative;
+  top: 70%;
+  left: 11%;
+  transform: translate(-50%, -50%);
+}
+
+.titleButton {
+  background-color:#e4685d;
+	border-radius:4px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:26px;
+	padding:15px 30px;
+	text-decoration:none;
+}
+.titleButton:hover {
+	background-color:#eb675e;
+}
+.titleButton:disabled{
+  background-color:#A95049;
+}
+.titleButton:active {
+  position:relative;
+	top:1px;
+}
