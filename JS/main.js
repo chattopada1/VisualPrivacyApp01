@@ -127,7 +127,7 @@ function submitPwd() {
 
 function intel() {
   swal({
-    text: "According to our provider, the agent is using some form of cryptography to lock their modification. The key itself has been encrypted. The provider have discover the method they use to encrypt the key.\n\nThe characters' positions have been shifted two spaces forward or backward\n" ,
+    text: "According to our provider, the agent is using some form of cryptography to lock their modification. The key itself has been encrypted. The provider have discovered the method they used to encrypt the key.\n\nThe characters' positions have been shifted two spaces forward or backward\n" ,
     title: "Encrypted Key: " + key.slice(2) + key.slice(0,2),
     icon: "info",
     button: "Decrypt now"
