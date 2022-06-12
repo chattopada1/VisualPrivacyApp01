@@ -112,17 +112,26 @@ function openCVReady() {
 function cascadeIsReady(){}
 
 function submitPwd() {
-  var pwd = document.getElementById("submit").value;
-  if (pwd == key) {
+  const pwd = document.getElementById("submit").value;
+  if (pwd === key) {
     document.getElementById("option").style.visibility = "visible";
     document.getElementById("keyLock").style.visibility = "hidden";
   } else {
-    alert("Wrong Password");
+    swal({
+      title: "Wrong Password",
+      icon: "error",
+      button: "Try again"
+    });
   }
 }
 
 function intel() {
-  alert("According to our provider, the agent is using some form of cryptography to lock their modification. The key itself has been encrypted. The provider have discover the method they use to encryp the key.\nAll the characters in the key has been shift two character forward or backward\n" + key.slice(2) + key.slice(0,2));
+  swal({
+    text: "According to our provider, the agent is using some form of cryptography to lock their modification. The key itself has been encrypted. The provider have discover the method they use to encrypt the key.\n\nThe characters' positions have been shifted two spaces forward or backward\n" ,
+    title: "Encrypted Key: " + key.slice(2) + key.slice(0,2),
+    icon: "info",
+    button: "Decrypt now"
+      });
 }
 
 flag = 0;
@@ -135,12 +144,18 @@ function clearpwd() {
 }
 
 function startEdit() {
-  if (openCVReadyFlag == false) {
-    alert("OpenCV hasn't finnished loading. PLease wait a moment before trying again.");
+  if (openCVReadyFlag === false) {
+    swal({
+      text: "OpenCV hasn't finished loading. PLease wait a moment before trying again.",
+      icon: "info"
+    });
     return;
   }
-  if (chosenPlayerFlag == false) {
-    alert("You haven't choose the agent.");
+  if (chosenPlayerFlag === false) {
+    swal({
+      title: "You didn't choose an agent.",
+      icon: "warning"
+    });
     return;
   }
   container.style.background = "";
@@ -270,25 +285,37 @@ function enterPassword() {
 }
 
 function submitPassword() {
-  pwd = document.getElementById("pwd").value;
+  let pwd = document.getElementById("pwd").value;
 
-  if (pwd == "") {
-    alert("Enter a key");
+  if (pwd === "") {
+    swal({
+      title: "Enter a key",
+      icon: "warning"
+    });
     return;
   }
 
-  if (pwd.length != 4) {
-    alert("Please use a 4 digit key!");
+  if (pwd.length !== 4) {
+    swal({
+      title: "Enter a four letter key",
+      icon: "warning"
+    });
     return;
   }
 
   if (/\d/.test(pwd)) {
-    alert("Please use no number in your key!");
+    swal({
+      title: "Please use no numbers in your key",
+      icon: "warning"
+    });
     return;
   }
 
   if (/[~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g.test(pwd)) {
-    alert("Please use no special charactor in your key!");
+    swal({
+      title: "Please don't use any special characters in your key",
+      icon: "warning"
+    });
     return;
   }
 
@@ -334,66 +361,66 @@ function enterPlayer2() {
   hunter = true;
 }
 
-
-
 function submitTarget(picture) {
-  if (confirm("Do you want to lock down on this target?")) {
-    if (upload) {
-      if (picture.src == chosenPlayer.src) {
-        turnOffEffect();
-        document.getElementById("edit").style.visibility = "hidden";
-        document.getElementById("maleChoice").style.visibility = "hidden";
-        document.getElementById("roleSelector").style.visibility = "hidden";
-        document.getElementById("option").style.visibility = "hidden";
-        document.getElementById("intelBtn").style.visibility = "hidden";
-        document.getElementById("submitPwdBtn").style.visibility = "hidden";
-        document.getElementById("submit").style.visibility = "hidden";
-        document.getElementById("win").style.visibility = "visible";
-      }
-      else {
-        turnOffEffect();
-        document.getElementById("edit").style.visibility = "hidden";
-        document.getElementById("maleChoice").style.visibility = "hidden";
-        document.getElementById("roleSelector").style.visibility = "hidden";
-        document.getElementById("option").style.visibility = "hidden";
-        document.getElementById("intelBtn").style.visibility = "hidden";
-        document.getElementById("submitPwdBtn").style.visibility = "hidden";
-        document.getElementById("submit").style.visibility = "hidden";
-        document.getElementById("win").style.visibility = "visible";
+  swal({
+    text: "Do you want to lock down on this target?",
+    icon: "warning",
+    buttons: ["No", "Yes"]
+  }).then(function(isConfirm) {
+    if (isConfirm) {
+      if (upload) {
+        if (picture.src === chosenPlayer.src) {
+          turnOffEffect();
+          document.getElementById("edit").style.visibility = "hidden";
+          document.getElementById("maleChoice").style.visibility = "hidden";
+          document.getElementById("roleSelector").style.visibility = "hidden";
+          document.getElementById("option").style.visibility = "hidden";
+          document.getElementById("intelBtn").style.visibility = "hidden";
+          document.getElementById("submitPwdBtn").style.visibility = "hidden";
+          document.getElementById("submit").style.visibility = "hidden";
+          document.getElementById("win").style.visibility = "visible";
+        } else {
+          turnOffEffect();
+          document.getElementById("edit").style.visibility = "hidden";
+          document.getElementById("maleChoice").style.visibility = "hidden";
+          document.getElementById("roleSelector").style.visibility = "hidden";
+          document.getElementById("option").style.visibility = "hidden";
+          document.getElementById("intelBtn").style.visibility = "hidden";
+          document.getElementById("submitPwdBtn").style.visibility = "hidden";
+          document.getElementById("submit").style.visibility = "hidden";
+          document.getElementById("win").style.visibility = "visible";
 
-        document.getElementById("labelWinLose").innerHTML = "You lose";
-        document.getElementById("announcement").innerHTML = "You have identifed and captured the wrong target!";
-      }
-    } else {
-      if (picture.src == chosenPlayer.src) {
-        turnOffEffect();
-        document.getElementById("edit").style.visibility = "hidden";
-        document.getElementById("maleChoice").style.visibility = "hidden";
-        document.getElementById("roleSelector").style.visibility = "hidden";
-        document.getElementById("option").style.visibility = "hidden";
-        document.getElementById("intelBtn").style.visibility = "hidden";
-        document.getElementById("submitPwdBtn").style.visibility = "hidden";
-        document.getElementById("submit").style.visibility = "hidden";
-        document.getElementById("win").style.visibility = "visible";
-      }
-      else {
-        turnOffEffect();
-        document.getElementById("edit").style.visibility = "hidden";
-        document.getElementById("maleChoice").style.visibility = "hidden";
-        document.getElementById("roleSelector").style.visibility = "hidden";
-        document.getElementById("option").style.visibility = "hidden";
-        document.getElementById("intelBtn").style.visibility = "hidden";
-        document.getElementById("submitPwdBtn").style.visibility = "hidden";
-        document.getElementById("submit").style.visibility = "hidden";
-        document.getElementById("win").style.visibility = "visible";
+          document.getElementById("labelWinLose").innerHTML = "You lose";
+          document.getElementById("announcement").innerHTML = "You have identified and captured the wrong target!";
+        }
+      } else {
+        if (picture.src === chosenPlayer.src) {
+          turnOffEffect();
+          document.getElementById("edit").style.visibility = "hidden";
+          document.getElementById("maleChoice").style.visibility = "hidden";
+          document.getElementById("roleSelector").style.visibility = "hidden";
+          document.getElementById("option").style.visibility = "hidden";
+          document.getElementById("intelBtn").style.visibility = "hidden";
+          document.getElementById("submitPwdBtn").style.visibility = "hidden";
+          document.getElementById("submit").style.visibility = "hidden";
+          document.getElementById("win").style.visibility = "visible";
+        } else {
+          turnOffEffect();
+          document.getElementById("edit").style.visibility = "hidden";
+          document.getElementById("maleChoice").style.visibility = "hidden";
+          document.getElementById("roleSelector").style.visibility = "hidden";
+          document.getElementById("option").style.visibility = "hidden";
+          document.getElementById("intelBtn").style.visibility = "hidden";
+          document.getElementById("submitPwdBtn").style.visibility = "hidden";
+          document.getElementById("submit").style.visibility = "hidden";
+          document.getElementById("win").style.visibility = "visible";
 
-        document.getElementById("labelWinLose").innerHTML = "You lose";
-        document.getElementById("announcement").innerHTML = "You have identifed and captured the wrong target!";
+          document.getElementById("labelWinLose").innerHTML = "You lose";
+          document.getElementById("announcement").innerHTML = "You have identified and captured the wrong target!";
+        }
       }
     }
-  } else {
-    return;
-  }
+  })
 }
 
 function restart() {
@@ -435,7 +462,10 @@ function edit(effect) {
       effect.checked = true;
 
       if (hunterCounter <= 0) {
-        alert ("You have ran out of undo!");
+        swal ({
+          title: "You have ran out of undoes!",
+          icon: "warning"
+        });
         effect.checked = false;
         return;
       }
@@ -448,15 +478,24 @@ function edit(effect) {
     if (hunter) {
       effect.checked = false;
       if (hunterCounter <= 0) {
-        alert ("You have ran out of undo!");
+        swal ({
+          title: "You have ran out of undoes!",
+          icon: "warning"
+        });
         return;
       }
       hunterCounter --;
-      alert ("You have chosen the wrong effect to remove!");
+      swal ({
+        title: "You have chosen the wrong effect to remove!",
+        icon: "error"
+      });
       return;
     }
-    if (editLimit == 0) {
-      alert("Can't add more effect");
+    if (editLimit === 0) {
+      swal({
+        title: "Can't add more effects",
+        icon: "warning"
+      });
       effect.checked = false;
       return;
     }
