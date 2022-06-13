@@ -127,22 +127,37 @@
 
               <div id = "option">
                 <h2 style="color:white; margin: 0;">Facial Modification</h2>
-                <label for="blurFace" style="color:white;" id = "1"><input type="checkbox" name="blurFace" value="Blur Face" id="blurFace" onclick = "edit(this)" />Blur Face</label>
+                <label for="blurFace" style="color:white;" id = "1">
+                  <input type="checkbox" name="blurFace" value="Blur Face" id="blurFace" onclick = "edit(this)"/>
+                  Blur Face <br>
+                  <button class = "learn_more" type="button" onclick="toggleMoreInfo('Blur Face')">More Info</button>
+                </label>
                 <br>
                 <!--
                 <label for="funnyFace" style="color:white;" id = "2"><input type="checkbox" name="funnyFace" value="Funny Face" id="funnyFace" onclick = "edit(this)"/>Funny Face</label>
 
                 <br>-->
-                <label for="recolor" style="color:white;" id = "3"><input type="checkbox" name="recolor" value="Recolor" id="recolor" onclick = "edit(this)"/>Scribble</label>
+                <label for="recolor" style="color:white;" id = "3">
+                  <input type="checkbox" name="recolor" value="Recolor" id="recolor" onclick = "edit(this)"/>
+                  Scribble <br>
+                  <button class = "learn_more" type="button" onclick="toggleMoreInfo('Scribble')">More Info</button>
+                </label>
 
                 <h2 style="color:white; margin: 0;">Full Modification</h2>
 
-                <label for="fullColor" style="color:white;" id = "4"><input type="checkbox" name="fullColor" value="Full Color" id="fullColor" onclick = "edit(this)"/>Full Color</label>
+                <label for="fullColor" style="color:white;" id = "4">
+                  <input type="checkbox" name="fullColor" value="Full Color" id="fullColor" onclick = "edit(this)"/>
+                  Full Color <br>
+                  <button class = "learn_more" type="button" onclick="toggleMoreInfo('Full Color')">More Info</button>
+                </label>
                 <br>
                 <!--
                 <label for="scribble" style="color:white;" id = "5"><input type="checkbox" name="scribble" value="Scribble" id="scribble" onclick = "edit(this)"/>Scribble</label>
                 <br>-->
-                <label for="gaussianBlur" style="color:white;" id = "6"><input type="checkbox" name="gaussianBlur" value="Gaussian Blur" id="gaussianBlur" onclick = "edit(this)"/>Gaussian Blur</label>
+                <label for="gaussianBlur" style="color:white;" id = "6"><input type="checkbox" name="gaussianBlur" value="Gaussian Blur" id="gaussianBlur" onclick = "edit(this)"/>
+                  Gaussian Blur <br>
+                  <button class = "learn_more" type="button" onclick="toggleMoreInfo('Gaussian Blur')">More Info</button>
+                </label>
                 <br>
               </div>
             </div>

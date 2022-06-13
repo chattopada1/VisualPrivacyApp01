@@ -64,3 +64,8 @@ img {
   position:relative;
 	top:1px;
 }
+
+.learn_more {
+    margin: 10px 20px 20px;
+    padding: 5px;
+}

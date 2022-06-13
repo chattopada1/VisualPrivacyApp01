@@ -507,8 +507,8 @@ function edit(effect) {
 }
 
 function toggelEffect(effectID) {
-  if (effectID == "blurFace") {
-    if (blurLayer.style.visibility == "hidden") {
+  if (effectID === "blurFace") {
+    if (blurLayer.style.visibility === "hidden") {
       blurLayer.style.visibility = "visible";
     }  else {
       blurLayer.style.visibility = "hidden";
@@ -518,8 +518,8 @@ function toggelEffect(effectID) {
     }
     return;
   }
-  if (effectID == "funnyFace") {
-    if (funnyFaceLayer.style.visibility == "hidden") {
+  if (effectID === "funnyFace") {
+    if (funnyFaceLayer.style.visibility === "hidden") {
       funnyFaceLayer.style.visibility = "visible";
     }  else {
       funnyFaceLayer.style.visibility = "hidden";
@@ -529,8 +529,8 @@ function toggelEffect(effectID) {
     }
     return;
   }
-  if (effectID == "recolor") {
-    if (recolorLayer.style.visibility == "hidden") {
+  if (effectID === "recolor") {
+    if (recolorLayer.style.visibility === "hidden") {
       recolorLayer.style.visibility = "visible";
     }  else {
       recolorLayer.style.visibility = "hidden";
@@ -540,8 +540,8 @@ function toggelEffect(effectID) {
     }
     return;
   }
-  if (effectID == "fullColor") {
-    if (fullColorLayer.style.visibility == "hidden") {
+  if (effectID === "fullColor") {
+    if (fullColorLayer.style.visibility === "hidden") {
       fullColorLayer.style.visibility = "visible";
     }  else {
       fullColorLayer.style.visibility = "hidden";
@@ -551,8 +551,8 @@ function toggelEffect(effectID) {
     }
     return;
   }
-  if (effectID == "scribble") {
-    if (scribbleLayer.style.visibility == "hidden") {
+  if (effectID === "scribble") {
+    if (scribbleLayer.style.visibility === "hidden") {
       scribbleLayer.style.visibility = "visible";
     }  else {
       scribbleLayer.style.visibility = "hidden";
@@ -562,8 +562,8 @@ function toggelEffect(effectID) {
     }
     return;
   }
-  if (effectID == "gaussianBlur") {
-    if (editCanvas.style.filter == "") {
+  if (effectID === "gaussianBlur") {
+    if (editCanvas.style.filter === "") {
       editCanvas.style.filter = "blur(5px)";
       blurLayer.style.filter = "blur(5px)";
       recolorLayer.style.filter = "blur(5px)";
@@ -581,8 +581,25 @@ function toggelEffect(effectID) {
       fullColorLayer.style.filter = "";
       funnyFaceLayer.style.filter = "";
     }
-    return;
   }
+}
+
+function toggleMoreInfo(title) {
+  let info = "";
+  if (title === "Blur Face") {
+    info = "blur face"
+  } else if (title === "Scribble") {
+    info = "scribble"
+  } else if (title === "Full Color") {
+    info = "full color"
+  } else {
+    info = "gaussian blur"
+  }
+  swal({
+    title: title,
+    text: info,
+    icon: "info"
+  });
 }
 
 function getBase64Image(img) {
