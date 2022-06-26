@@ -428,6 +428,10 @@ function restart() {
 }
 
 function finishEdit() {
+  document.getElementById("learn_blurFace").remove();
+  document.getElementById("learn_scribble").remove();
+  document.getElementById("learn_fullColor").remove();
+  document.getElementById("learn_gaussian").remove();
   editDiv.style.visibility = 'hidden';
   encryptionDiv.style.visibility = "visible";
   turnOffEffect();
@@ -587,13 +591,13 @@ function toggelEffect(effectID) {
 function toggleMoreInfo(title) {
   let info = "";
   if (title === "Blur Face") {
-    info = "blur face"
+    info = "Conceals face by completely covering it."
   } else if (title === "Scribble") {
-    info = "scribble"
+    info = "Changes the image into a scribble form of drawing."
   } else if (title === "Full Color") {
     info = "full color"
   } else {
-    info = "gaussian blur"
+    info = "Blurs the whole image by a Gaussian function which reduces image detail."
   }
   swal({
     title: title,
