@@ -15,7 +15,7 @@
 </script>
   <link rel="stylesheet" href="mystyle.css">
 </head>
-  <body>
+<body>
     <div id = "container" style = "background-image: url('images/source.gif'); width: 976px; height: 685px;">
 
       <div id="title">
@@ -117,7 +117,7 @@
             </div>
             <div class="wrapper" style = "position: relative;">
               <div id = "keyLock" style = "visibility: hidden; position: absolute;text-align: center;">
-                <textarea id = "submit" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" name="name" rows="1" cols="20" style = "font-size: 20px; text-align: center;">Enter Password Here</textarea>
+                <textarea id = "submit" onfocus="if(this.value === this.defaultValue)this.value=''" onblur="if(this.value === '')this.value=this.defaultValue" name="name" rows="1" cols="20" style = "font-size: 20px; text-align: center;">Enter Password Here</textarea>
                 <div class="titleButtonDivAlt" style = "top: 80px; left: 44%">
                   <button class="titleButton" onclick="submitPwd()" id = "submitPwdBtn">Submit</button>
                   <button class="titleButton" onclick="intel()" style = "color: blue;" id = "intelBtn">Crack Password</button>
@@ -193,7 +193,7 @@
             </h1>
           </div>
           <div class="" style = "text-align: center;">
-            <h2 style = "margin-top: 0px; border-bottom-width: 0px; padding-bottom: 20px;padding-top: 20px;">
+            <h2 style = "margin-top: 0; border-bottom-width: 0; padding-bottom: 20px;padding-top: 20px;">
               Do you want to encrypt your modification
             </h2>
             <div class="titleButtonDivAlt">
@@ -202,8 +202,8 @@
             </div>
           </div>
           <div class="" style = "text-align: left; background-color: gray;">
-            <p style = "color: white;font-size: 20px;padding-bottom: 20px;padding-left: 5px;padding-right: 10px;padding-top: 20px;">
-              Cryptography is the art of protecting information by transforming it into an unreadable format, called cipher text. Only those who possess a secret key can decipher the message into plain text. Encrypted messages can sometimes be broken by cryptanalysis, also called codebreaking, although modern cryptography techniques are virtually unbreakable.
+            <p style = "color: white;font-size: 20px;padding-bottom:20px; padding-left: 5px;padding-right: 10px;padding-top: 20px;">
+              Cryptography is the art of protecting information by transforming it into an unreadable format, called cipher text. Only those who possess a secret key can decipher the message into plain text. Encrypted messages can sometimes be broken by cryptanalysis, also called code-breaking, although modern cryptography techniques are virtually unbreakable.
             </p>
           </div>
       </div>
@@ -214,7 +214,7 @@
             Enter Key
           </h1>
         </div>
-        <textarea id="pwd"rows="1" onfocus="if(this.value==this.defaultValue)this.value=''" onblur="if(this.value=='')this.value=this.defaultValue" cols="43" style = "font-size: 40px;text-align: center;margin-bottom: 20px;">Enter a 4 letter password</textarea>
+        <textarea id="pwd"rows="1" onfocus="if(this.value === this.defaultValue)this.value=''" onblur="if(this.value === '')this.value=this.defaultValue" cols="43" style = "font-size: 40px;text-align: center;margin-bottom: 20px;">Enter a 4 letter password</textarea>
         <button class="titleButton" name="button" onclick="submitPassword()" style="width: -webkit-fill-available;">Submit</button>
       </div>
       <div id = "win" style = "visibility: hidden;">
@@ -240,5 +240,5 @@
       <script src = "JS/main.js"></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </div>
-  </body>
+</body>
 </html>
