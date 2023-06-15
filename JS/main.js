@@ -63,6 +63,8 @@ var doppelgangerSets=[];
 var lastSliderVal=1;
 
 var imageDir='images/cherry_picked_pics/';
+var imageDir60='images/cherry_picked_pics_60/';
+var imageDir150='images/cherry_picked_pics_150/';
 
 
 
@@ -90,6 +92,7 @@ function onLoad() {
             onloadLock++;
         });
     }
+    imageSets=getRandomImages(imageDir150, 10)
 }
 
 function getRandomImages(directory, count) {
@@ -149,7 +152,6 @@ function startGameButton() {
     document.getElementById("effectCount").innerHTML = "Effect Left: " + editLimit;
     let slider = document.getElementById("doppelgangerSlider").querySelector(".slider");
     slider.value = 1;
-    imageSets=getRandomImages(imageDir, 10)
     originalImageLocs=imageSets
     finalAgentChoices=originalImageLocs
     for (var i = 0; i < originalImagesElements.length; i++) {
@@ -181,7 +183,7 @@ function drawBackGroundEffect() {
 function choosePlayer(caller) {
     chosenPlayerFlag = true;
     upload = false;
-    chosenPlayer.src = caller.src;
+    chosenPlayer.src = caller.src.replace(imageDir150, imageDir);
     mat = cv.imread(chosenPlayer);
 }
 
@@ -279,9 +281,10 @@ function calcGreyScale(){
 }
 
 function startEdit() {
-    doppelgangerSets.push(getDoppelgangerImages(imageDir, 2))
-    doppelgangerSets.push(getDoppelgangerImages(imageDir, 3))
-    doppelgangerSets.push(getDoppelgangerImages(imageDir, 4))
+    doppelgangerSets.push(getDoppelgangerImages(imageDir60, 2))
+    doppelgangerSets.push(getDoppelgangerImages(imageDir60, 3))
+    doppelgangerSets.push(getDoppelgangerImages(imageDir60, 4))
+    timestamp = new Date().getTime();
 
     for (var i = 0; i < doppelgangerElements.length; i++) {
         doppelgangerElements[i].src=originalImageLocs[i]
@@ -319,6 +322,7 @@ function startEdit() {
     //cv.resize(mat, resizeMat, dsize, 0, 0, cv.INTER_AREA);
     //cv.imshow("canvas", mat);
     ctx.drawImage(chosenPlayer,0,0, 600, 600)
+
 
     xScale = 600 / (mat.size().width);
     yScale = 600 / (mat.size().height);
@@ -532,7 +536,7 @@ function submitTarget(picture) {
                     document.getElementById("announcement").innerHTML = "You have identified and captured the wrong target!";
                 }
             } else {
-                if (picture.src === chosenPlayer.src) {
+                if (picture.src.replace(imageDir60, imageDir) === chosenPlayer.src) {
                     turnOffEffect();
                     document.getElementById("edit").style.visibility = "hidden";
                     document.getElementById("maleChoice").style.visibility = "hidden";
