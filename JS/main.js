@@ -566,6 +566,7 @@ function submitTarget(picture) {
 }
 
 
+
 function restart() {
     location.reload();
 }
