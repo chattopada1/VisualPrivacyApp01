@@ -664,7 +664,10 @@ function getDoppelgangerImages(directory, value) {
 }
 
 function updateDoppelgangers(value){
-    editLimit=editLimit-(value-lastSliderVal)
+    if ((lastSliderVal < value && value > 2) || (lastSliderVal > value && value > 1)){
+        editLimit = editLimit - (value - lastSliderVal)
+    }
+
     if(editLimit<0){
         swal({
             title: "Can't add more effects", icon: "warning"
